@@ -15,7 +15,7 @@ export default function CoinsByCategory() {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:5000/coins/${category}`, {
+    fetch(`https://coin-catalogue-project-nhsy.vercel.app/coins/${category}`, {
       headers: {
         "api-key": "Elvin1234",
       },
