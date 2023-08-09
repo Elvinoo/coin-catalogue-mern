@@ -14,7 +14,6 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 const PORT = process.env.PORT || 5000;
 mongoose.set("strictQuery", false);
-app.use('/images', express.static(__dirname + '/public/images'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 dotenv.config();
