@@ -5,7 +5,7 @@ import axios from "axios";
 // Async thunk for fetching data
 export const fetchData = createAsyncThunk("data/fetchData", async () => {
   try {
-    const response = await axios.get("http://localhost:5000");
+    const response = await axios.get("http://localhost:5000" || "https://coin-catalogue-project.vercel.app/");
     return response.data;
   } catch (error) {
     throw Error("Error fetching data");
