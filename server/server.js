@@ -16,7 +16,12 @@ dotenv.config();
 import Coin from "./Models/CoinModel.js"
 
 import  User from "./Models/UserModel.js";
-app.use(cors());
+
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(process.env.MONGO_URI);
