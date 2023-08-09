@@ -1,6 +1,11 @@
 import express from "express";
 
 import cors from "cors";
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 import bcrypt from "bcrypt"
 const app = express();
@@ -9,7 +14,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 const PORT = process.env.PORT || 5000;
 mongoose.set("strictQuery", false);
-app.use("/images", express.static("imgs"));
+app.use('/images', express.static(__dirname + '/imgs'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 dotenv.config();
