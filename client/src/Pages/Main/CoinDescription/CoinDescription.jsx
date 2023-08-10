@@ -58,7 +58,7 @@ export default function CoinDescription() {
               </tr>
               <tr>
                 <td>Price</td>
-                <td>{coin.price}</td>
+                <td>{coin.price}$</td>
               </tr>
             </tbody>
           </table>

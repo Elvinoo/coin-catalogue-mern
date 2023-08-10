@@ -2,7 +2,11 @@ import express from "express";
 
 import cors from "cors";
 const app = express();
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 const PORT = process.env.PORT || 5000;
@@ -69,11 +73,15 @@ app.post("/addCoin", async (req, res) => {
 
 app.get("/search", async (req, res) => {
   const { q, ...rest } = req.query;
+
   let query = {
     isRemoved: 0,
-    price: { $gte: rest.priceFrom, $lte: rest.priceTo },
-    year: { $gte: rest.yearFrom, $lte: rest.yearTo },
+    price: { $gte: Number(rest.priceFrom), $lte: Number(rest.priceTo )},
+    year: { $gte: Number(rest.yearFrom), $lte: Number(rest.yearTo) },
   };
+
+
+  
   if (rest.category) query.category = rest.category;
   if (rest.country) query.country = rest.country;
   if (rest.metal) query.metal = rest.metal;
@@ -103,7 +111,7 @@ app.put("/editCoin/:id", async (req, res) => {
 
   try {
     const coin = await Coin.findByIdAndUpdate(id, updatedData);
-    console.log(coin);
+   
     if (coin) {
       res.send({ successful: true });
     } else {
@@ -191,7 +199,6 @@ app.put("/editCoin/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const updatedData = req.body;
-
     const coin = await Coin.findByIdAndUpdate(id, updatedData, { new: true });
     res.send({ successful: true, coin });
   } catch (err) {

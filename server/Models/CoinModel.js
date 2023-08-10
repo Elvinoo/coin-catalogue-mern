@@ -21,7 +21,7 @@ const coinSchema = mongoose.Schema({
     required: [true, "Please write the year!"],
   },
   price: {
-    type: String,
+    type: Number,
     required: [true, "Please write the price!"],
   },
   country: {

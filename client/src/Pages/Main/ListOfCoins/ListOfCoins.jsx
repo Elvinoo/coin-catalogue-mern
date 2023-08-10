@@ -16,20 +16,27 @@ export default function ListOfCoins() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // setClicked(true);
+   
     navigate(`/search?q=` + value);
+
     setValue("");
   };
   useEffect(() => {
-    axios.get(`/search?${query}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.length === 0) {
-          return setSearchResult(false);
-        }
-        setSearchResult(true);
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/search?${query}`);
+        const data = response.data;
+  
+        setSearchResult(data.length > 0);
         setCoins(data);
-      });
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+  
+    fetchData();
   }, [query]);
+  
   return (
     <div className="list-of-coins">
       <h1 className="home-page-header">List of the coins</h1>

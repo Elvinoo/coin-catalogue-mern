@@ -14,14 +14,17 @@ export default function CoinsByCategory() {
       navigate(`/search?q=${value.toLowerCase()}`);
     }
   };
-
   useEffect(() => {
-    axios.get(`/coins/${category}`)
-      .then((res) => res.json())
-      .then((data) => {
+    axios.get(`http://localhost:5000/coins/${category}`)
+      .then((response) => {
+        const data = response.data;
         setCoins(data);
+      })
+      .catch((error) => {
+        console.error('Error fetching coins:', error);
       });
   }, [category]);
+ 
   return (
     <div className="category">
       <h1 className="category-name">
