@@ -1,6 +1,6 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-
 export default function ListOfCoins() {
   const [coins, setCoins] = useState([]);
   const [value, setValue] = useState("");
@@ -20,11 +20,7 @@ export default function ListOfCoins() {
     setValue("");
   };
   useEffect(() => {
-    fetch(`http://localhost:5000/search?${query}`, {
-      headers: {
-        "api-key": "Elvin1234",
-      },
-    })
+    axios.get(`/search?${query}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.length === 0) {

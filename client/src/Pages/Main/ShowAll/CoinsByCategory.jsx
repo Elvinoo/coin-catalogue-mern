@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 import "./CoinsByCategory.css";
+import axios from "axios";
 export default function CoinsByCategory() {
   const [coins, setCoins] = useState([]);
   const { category } = useParams();
@@ -15,11 +16,7 @@ export default function CoinsByCategory() {
   };
 
   useEffect(() => {
-    fetch(`https://coin-catalogue-project.vercel.app/coins/${category}`, {
-      headers: {
-        "api-key": "Elvin1234",
-      },
-    })
+    axios.get(`/coins/${category}`)
       .then((res) => res.json())
       .then((data) => {
         setCoins(data);
